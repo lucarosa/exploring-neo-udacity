@@ -25,7 +25,7 @@ def load_neos(neo_csv_path):
     :return: A collection of `NearEarthObject`s.
     """
     # TODO: Load NEO data from the given CSV file.
-    haz_dict{'N': False, 'Y': True}
+    haz_dict = {'N': False, 'Y': True}
 
     neos = []
     with open(neo_csv_path, 'r') as file:
