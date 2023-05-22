@@ -1,3 +1,5 @@
+"""This module contains the classes for all the AttributeFilters."""
+
 import operator
 import itertools
 
@@ -53,36 +55,146 @@ class AttributeFilter():
         raise UnsupportedCriterionError
 
     def __repr__(self):
+        """
+        Return a string representation of the AttributeFilter object.
+
+        Returns:
+            str: String representation of the AttributeFilter object.
+        """
         return f"{self.__class__.__name__}(op=operator.{self.op.__name__}, value={self.value})"
 
 
 class DateFilter(AttributeFilter):
+    """
+    A class that filters and extracts the date from a given approach object.
+
+    This class inherits from the AttributeFilter class and provides a method
+    to retrieve the date from the approach object's time attribute.
+
+    Methods:
+        get(approach): Retrieves the date from the time attribute of the
+        approach object.
+    """
+
     @classmethod
     def get(cls, approach):
+        """
+        Retrieve the date from the time attribute of the approach object.
+
+        Parameters:
+            approach (Approach): The approach object containing the time attribute.
+
+        Returns:
+            datetime.date: The date value.
+        """
         return approach.time.date()
 
 
 class DistanceFilter(AttributeFilter):
+    """
+    A class that filters and retrieves the distance from a given approach object.
+
+    This class inherits from the AttributeFilter class and provides a method
+    to retrieve the distance from the approach object's distance attribute.
+
+    Methods:
+        get(approach): Retrieves the distance from the distance attribute of
+        the approach object. 
+    """
+
     @classmethod
     def get(cls, approach):
+        """
+        Retrieve the distance from the distance attribute of the approach object.
+
+        Parameters:
+            approach (Approach): The approach object containing the distance attribute.
+
+        Returns:
+            float: The distance value.
+        """
         return approach.distance
 
 
 class VelocityFilter(AttributeFilter):
+    """
+    A class that filters and retrieves the velocity from a given approach object.
+
+    This class inherits from the AttributeFilter class and provides a method
+    to retrieve the velocity from the approach object's velocity attribute.
+
+    Methods:
+        get(approach): Retrieves the velocity from the velocity attribute of
+        the approach object.
+    """
+
     @classmethod
     def get(cls, approach):
+        """
+        Retrieve the velocity from the velocity attribute of the approach object.
+
+        Parameters:
+            approach (Approach): The approach object containing the velocity attribute.
+
+        Returns:
+            float: The velocity value.
+        """
         return approach.velocity
 
 
 class DiameterFilter(AttributeFilter):
+    """
+    A class that filters and retrieves the diameter from a given approach object.
+
+    This class inherits from the AttributeFilter class and provides a method
+    to retrieve the diameter from the approach object's neo attribute.
+
+    Methods:
+        get(approach): Retrieves the diameter from the diameter attribute of
+        the approach object's linked neo attribute.
+    """
+
     @classmethod
     def get(cls, approach):
+        """
+        Retrieve the diameter from the approach object.
+
+        Args:
+            approach (Approach): The approach object containing the diameter
+                attribute.
+
+        Returns:
+            float: The diameter value extracted from the approach object's neo
+            attribute.
+        """
         return approach.neo.diameter
 
 
 class HazardousFilter(AttributeFilter):
+    """
+    A class that filters and retrieves the hazardous flag from a given approach object.
+
+    This class inherits from the AttributeFilter class and provides a method
+    to retrieve the hazardous flag from the approach object's neo attribute.
+
+    Methods:
+        get(approach): Retrieves the hazardous flag from the hazardous attribute of
+        the approach object's neo attribute.
+    """
+
     @classmethod
     def get(cls, approach):
+        """
+        Retrieve the hazardous flag from the approach object.
+
+        Args:
+            approach (Approach): The approach object containing the hazardous
+                attribute.
+
+        Returns:
+            bool: The hazardous flag extracted from the approach object's neo
+            attribute.
+        """
         return approach.neo.hazardous
 
 
@@ -122,7 +234,6 @@ def create_filters(
     :param hazardous: Whether the NEO of a matching `CloseApproach` is potentially hazardous.
     :return: A collection of filters for use with `query`.
     """
-
     filters = []
 
     if date:

@@ -1,3 +1,12 @@
+"""
+This module contains the classes representing Near Earth Objects database.
+
+Class:
+- NEODatabase: A database of near-Earth objects and their close approaches.
+
+"""
+
+
 class NEODatabase:
     """A database of near-Earth objects and their close approaches.
 
@@ -25,7 +34,6 @@ class NEODatabase:
         :param neos: A collection of `NearEarthObject`s.
         :param approaches: A collection of `CloseApproach`es.
         """
-
         neos_dict = {neo.designation: neo for neo in neos}
         neos_names_dict = {neo.name: neo for neo in neos if neo.name}
 
@@ -52,7 +60,6 @@ class NEODatabase:
         :param designation: The primary designation of the NEO to search for.
         :return: The `NearEarthObject` with the desired primary designation, or `None`.
         """
-
         return self._neos_dict.get(designation, None)
 
     def get_neo_by_name(self, name):
@@ -69,7 +76,6 @@ class NEODatabase:
         :param name: The name, as a string, of the NEO to search for.
         :return: The `NearEarthObject` with the desired name, or `None`.
         """
-
         return self._neos_name_dict.get(name, None)
 
     def query(self, filters=()):
@@ -86,7 +92,6 @@ class NEODatabase:
         :param filters: A collection of filters capturing user-specified criteria.
         :return: A stream of matching `CloseApproach` objects.
         """
-
         for approach in self._approaches:
             if all([f(approach) for f in filters]):
                 yield approach
